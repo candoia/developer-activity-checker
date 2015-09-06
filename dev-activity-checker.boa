@@ -1,0 +1,56 @@
+# Developer activity stats
+p: Project = input;
+devActivityStats : output collection[string][string][int] of string;
+
+developers : map[string] of string;
+devsLastCommitTimes : map[string] of string;
+devsLastCommitFiles : map[string] of int;
+devsLastCommitMessages : map[string] of string;
+
+insertDevsLastCommit := function(dev : string, ctime : string, files : int, msg : string) {
+    if (haskey(developers, dev)) {
+        remove(devsLastCommitTimes, dev);
+        remove(devsLastCommitFiles, dev);
+        remove(devsLastCommitMessages, dev);
+        devsLastCommitTimes[dev] = ctime;
+        devsLastCommitFiles[dev] = files;
+        devsLastCommitMessages[dev] = msg;
+    } else {
+        developers[dev] = dev;
+        devsLastCommitTimes[dev] = ctime;
+        devsLastCommitFiles[dev] = files;
+        devsLastCommitMessages[dev] = msg;
+    }
+};
+
+visit(p, visitor {
+    before rev: Revision -> {
+        dev := rev.committer.username;
+        files := len(rev.files);
+        when := formattime("%c", rev.commit_date);
+        msg := rev.log;
+        #insertDevsLastCommit(dev, when, files, rev.log);
+        if (haskey(developers, dev)) {
+            remove(devsLastCommitTimes, dev);
+            remove(devsLastCommitFiles, dev);
+            remove(devsLastCommitMessages, dev);
+            devsLastCommitTimes[dev] = when;
+            devsLastCommitFiles[dev] = files;
+            devsLastCommitMessages[dev] = msg;
+        } else {
+            developers[dev] = dev;
+            devsLastCommitTimes[dev] = when;
+            devsLastCommitFiles[dev] = files;
+            devsLastCommitMessages[dev] = msg;
+        }
+    }
+});
+
+devKeys := keys(developers);
+foreach(i : int; def(devKeys[i])) {
+    developer := devKeys[i];
+    ctime := devsLastCommitTimes[developer];
+    dfiles := devsLastCommitFiles[developer];
+    cmsg := devsLastCommitMessages[developer];
+    devActivityStats[developer][ctime][dfiles] << cmsg;
+}

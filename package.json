@@ -1,0 +1,16 @@
+{
+  "name": "developer activity checker",
+  "productName": "Provides details about developer's last commit",
+  "version": "0.1.0",
+  "author": "Ganesha Upadhyaya <ganeshau@iastate.edu>",
+  "description": "Provides details about developer's last commit",
+  "main": "main.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/candoia/developer-activity-checker"
+  },
+  "icon": {
+	"type": "fa",
+	"name": "list"
+  }
+}
