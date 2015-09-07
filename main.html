@@ -11,9 +11,25 @@
       </div>
 
       <div style='text-align: left;' id='content'>
-      <!-- <p>
-        Number of null check fixing revisions : <span id='output' style="color:blue;font-weight:bold"></span>
-      </p> -->
+      <div id='controls'>
+          <form>
+            <label for="devToShow">Developer activity for</label>
+            <select id='devToShow'>
+            </select>
+          </form>
+      </div>
+      <p>
+        Developer : <span id='developer' style="color:blue;font-weight:bold"></span>
+      </p> 
+      <p>
+        Last Commit Date : <span id='commit-date'></span>
+      </p>
+      <p>
+        Files Modified : <span id='files'></span>
+      </p>
+      <p>
+        Commit Message : <span id='message'></span>
+      </p>
     </div>
     </div>
     <script src="../../shared/jquery.min.js"></script>
