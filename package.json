@@ -1,6 +1,6 @@
 {
-  "name": "developer activity checker",
-  "productName": "Provides details about developer's last commit",
+  "name": "developer-activity-checker",
+  "productName": "Developer Activity Checker",
   "version": "0.1.0",
   "author": "Ganesha Upadhyaya <ganeshau@iastate.edu>",
   "description": "Provides details about developer's last commit",
@@ -10,7 +10,7 @@
     "url": "https://github.com/candoia/developer-activity-checker"
   },
   "icon": {
-	"type": "fa",
-	"name": "list"
+    "type": "fa",
+    "name": "user-plus"
   }
 }
